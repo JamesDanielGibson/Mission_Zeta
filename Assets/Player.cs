@@ -16,15 +16,14 @@ public class Player : MonoBehaviour
     [SerializeField] float yawfactor = 1;
     [SerializeField] float yawControlFactor = 20;
     [SerializeField] float rollControlFactor = 25;
-
+    [SerializeField] float distanceFromCamera = 5;
     float xThrow, yThrow;
 
     Vector3 startPos ;// this fixes a bug where the defualt for the rocket is in the top right corner.
     // Start is called before the first frame update
     void Start()
     {
-        //transform.localPosition = startPos;
-        startPos = transform.localPosition;
+       startPos = new Vector3(transform.localPosition.x, transform.localPosition.y, distanceFromCamera);
     }
 
     // Update is called once per frame
@@ -53,7 +52,7 @@ public class Player : MonoBehaviour
         xThrow = CrossPlatformInputManager.GetAxis("Horizontal");
         float xOffset = xThrow * xSpeed * Time.deltaTime;
         float rawNextXPos = transform.localPosition.x + xOffset;
-        float xPos = Mathf.Clamp(rawNextXPos, -1 * (xRange - startPos.x), (xRange - startPos.x) - 2);// the strange offsets are for the bug that makes the rocket go to the right corner.
+        float xPos = Mathf.Clamp(rawNextXPos, -1 * (xRange ), (xRange ));// the strange offsets are for the bug that makes the rocket go to the right corner.
         transform.localPosition = new Vector3(xPos, transform.localPosition.y, startPos.z);
     }
 
@@ -62,7 +61,7 @@ public class Player : MonoBehaviour
         yThrow = CrossPlatformInputManager.GetAxis("Vertical");
         float yOffset = yThrow * ySpeed * Time.deltaTime;
         float rawNextYPos = transform.localPosition.y + yOffset;
-        float yPos = Mathf.Clamp(rawNextYPos, -1 * (yRange-startPos.y), yRange);// the strange offsets are for the bug that makes the rocket go to the right corner.
+        float yPos = Mathf.Clamp(rawNextYPos, -1 * (yRange), yRange);// the strange offsets are for the bug that makes the rocket go to the right corner.
         transform.localPosition = new Vector3(transform.localPosition.x, yPos, startPos.z);
     }
 }
