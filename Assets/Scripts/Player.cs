@@ -33,6 +33,15 @@ public class Player : MonoBehaviour
         ProcessRotation();
     }
 
+    void OnCollision(Collision collision)
+    {
+        print("I hath collided");
+    }
+    void OnTrigger(Collider other)
+    {
+        print("I Hath Triggered");
+    }
+
     private void ProcessRotation()
     {
         float pitch = transform.localPosition.y*pitchfactor+yThrow*pitchControlFactor;// this piece of code takes the position of the craft and adds an extra amount that the craft should rotate beyong the normal movement to give extra shooting range.
