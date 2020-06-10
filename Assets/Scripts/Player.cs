@@ -33,11 +33,11 @@ public class Player : MonoBehaviour
         ProcessRotation();
     }
 
-    void OnCollision(Collision collision)
+    void OnCollisionEnter(Collision collision)
     {
         print("I hath collided");
     }
-    void OnTrigger(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         print("I Hath Triggered");
     }
